@@ -1,0 +1,25 @@
+- hosts: all
+  become: yes
+
+  tasks:
+
+  - name: install packages
+    package:
+      name:
+        - bind-utils
+        - man
+        - man-pages
+        - mlocate
+        - sysstat
+        - vim  
+      state: present
+
+  - name: enable firewall
+    service:
+      name: firewalld
+      state: started
+      enabled: yes
+        
+  - name: disable selinux
+    selinux:
+       state: disabled      
